@@ -32,6 +32,32 @@ public class SongController {
     public ArrayList<Song> getListOfSongs() {
         ArrayList<Song> listOfSongs = myH2SongService.getListOfSongs();
         return listOfSongs;
-        
+
+    }
+
+    @PostMapping("/songs")
+    public Song addNewSongBasedOnId(@RequestBody Song newGivenSong) {
+        Song addedSong = myH2SongService.addGivenSong(newGivenSong);
+        if (addedSong == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return addedSong;
+    }
+
+    @PutMapping("/songs/{songId}")
+    public Song updateSong(@PathVariable int songId, @RequestBody Song patchSong) {
+        Song updatedSong = myH2SongService.updateSongBasedOnGivenId(songId, patchSong);
+        if (updatedSong == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return updatedSong;
+    }
+
+    @DeleteMapping("/songs/{songId}")
+    public void deleteSongBasedOnGivenid(@PathVariable int songId) {
+        Song deletedSong = myH2SongService.deleteSongBasedOnGivenId(songId);
+        if (deletedSong == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 }

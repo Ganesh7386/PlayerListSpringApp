@@ -7,6 +7,6 @@ import java.sql.SQLException;
 public class SongRowMapper implements RowMapper<Song> {
     public Song mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Song(rs.getInt("songId"), rs.getString("songName"), rs.getString("lyricist"), rs.getString("singer"),
-                rs.getString("director"));
+                rs.getString("musicDirector"));
     }
 }
